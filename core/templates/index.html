@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lora AI Studio</title>
+    <link rel="stylesheet" href="/static/styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-glow"></div>
+    
+    <header>
+        <div class="logo-container">
+            <div class="logo">LORA <span>STUDIO</span></div>
+            <div class="model-badge">Based on Stable Diffusion 2.1 V 768</div>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <section class="workspace">
+            <div class="glass-card generation-panel">
+                <h2>Create Magic</h2>
+                <div class="input-wrapper">
+                    <textarea id="user_prompt" placeholder="Describe her style, location, mood...">Lora, black leather jacket, ponytail, smiling</textarea>
+                </div>
+
+                <div class="controls-grid">
+                    <div class="control-group">
+                        <div class="label-row">
+                            <label>Steps 
+                                <span class="tooltip-icon" title="Number of generation iterations. More steps = better quality, but slower.">?</span>
+                            </label>
+                            <span id="steps_val">20</span>
+                        </div>
+                        <input type="range" id="steps" min="2" max="50" value="20" class="param-slider">
+                        <p id="steps_warning" class="warning-text"></p>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="label-row">
+                            <label>Guidance 
+                                <span class="tooltip-icon" title="How closely the AI follows your prompt. High values = more 'creative' but can be over-saturated.">?</span>
+                            </label>
+                            <span id="guidance_scale_val">4.5</span>
+                        </div>
+                        <input type="range" id="guidance_scale" min="1" max="15" value="4.5" step="0.5" class="param-slider">
+                        <p id="gs_warning" class="warning-text"></p>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="label-row">
+                            <label>Refine Steps 
+                                <span class="tooltip-icon" title="Post-processing detail enhancement. 0 skips refinement.">?</span>
+                            </label>
+                            <span id="refine_steps_val">20</span>
+                        </div>
+                        <input type="range" id="refine_steps" min="0" max="80" value="20" class="param-slider">
+                        <p id="refine_warning" class="warning-text"></p>
+                    </div>
+                </div>
+            <button id="generate_button" class="btn-primary">
+                    <span>Generate Masterpiece</span>
+            </button>
+            <div id="result_section" class="glass-card result-panel" style="display: none;">
+                <div class="result-header">
+                    <h3>Generated Results</h3>
+                    <div class="view-selector">
+                        <button class="view-btn active" data-type="raw">SD Raw</button>
+                        <button class="view-btn" data-type="polished">Polished</button>
+                        <button class="view-btn" data-type="final">FaceFix XL</button>
+                    </div>
+                </div>
+                <div class="image-display">
+                    <div id="loading_spinner" class="spinner"></div>
+                    <img id="main_result" src="" alt="Result">
+                </div>
+            </div>
+        </section>
+
+        <aside class="sidebar">
+            <div class="glass-card gallery-panel">
+                <h3>Lora Identity</h3>
+                <p class="subtitle">Reference Photos</p>
+                <div class="lora-grid">
+                    <div class="lora-card"><img src="http://localhost:8000/static/images/1.png" alt="Lora 1"></div>
+                    <div class="lora-card"><img src="http://localhost:8000/static/images/2.png" alt="Lora 2"></div>
+                    <div class="lora-card"><img src="http://localhost:8000/static/images/3.png" alt="Lora 3"></div>
+                    <div class="lora-card"><img src="http://localhost:8000/static/images/4.png" alt="Lora 4"></div>
+                </div>
+            </div>
+        </aside>
+    </main>
+    <script src="/static/scripts/script.js"></script>
+</body>
+</html>

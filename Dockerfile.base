@@ -1,0 +1,26 @@
+# 1. Базовый образ
+FROM python:3.11-slim-bullseye
+
+# 2. Системные зависимости (ставим один раз)
+RUN apt-get update && apt-get install -y \
+    git curl wget libgomp1 libstdc++6 libgl1 libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# 3. Слой NumPy (стабильная версия)
+RUN pip install --no-cache-dir numpy==1.24.1
+
+# 4. Слой Torch & Torchvision (Стабильный CPU стек)
+RUN pip install --no-cache-dir \
+    torch==2.2.1 torchvision==0.17.1 \
+    --extra-index-url https://download.pytorch.org/whl/cpu
+
+# 5. Слой зависимостей (Фиксируем версии, чтобы избежать конфликтов)
+RUN pip install --no-cache-dir \
+    fastapi uvicorn jinja2 python-multipart \
+    diffusers==0.26.3 \
+    transformers==4.38.2 \
+    accelerate==0.27.2 \
+    huggingface_hub==0.20.3 \
+    pillow
