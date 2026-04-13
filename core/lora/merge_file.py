@@ -34,7 +34,6 @@ def merge_file(original_file_name):
 
 if __name__ == "__main__":
     try:
-        merge_file("adapter_model.safetensors")
         merge_file("pure_lora_weights.pt")
     except Exception as e:
         print(f"Error: {e}")
